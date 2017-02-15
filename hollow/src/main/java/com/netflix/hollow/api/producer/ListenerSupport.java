@@ -3,7 +3,6 @@ package com.netflix.hollow.api.producer;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-import com.netflix.hollow.api.HollowStateTransition;
 import com.netflix.hollow.api.producer.HollowProducerListener.ProducerStatus;
 
 final class ListenerSupport {
@@ -25,32 +24,32 @@ final class ListenerSupport {
         for(final HollowProducerListener l : listeners) l.onProducerInit();
     }
 
-    void fireProducerRestore(HollowStateTransition transition) {
-        for(final HollowProducerListener l : listeners) l.onProducerRestore(transition.getToVersion());
+    void fireProducerRestore(long version) {
+        for(final HollowProducerListener l : listeners) l.onProducerRestore(version);
     }
 
-    void fireCycleStart(HollowStateTransition transition) {
-        for(final HollowProducerListener l : listeners) l.onCycleStart(transition.getToVersion());
+    void fireCycleStart(long version) {
+        for(final HollowProducerListener l : listeners) l.onCycleStart(version);
     }
 
     void fireCycleComplete(ProducerStatus cycleStatus) {
         for(final HollowProducerListener l : listeners) l.onCycleComplete(cycleStatus);
     }
 
-    void fireNoDelta(HollowStateTransition transition) {
-        for(final HollowProducerListener l : listeners) l.onNoDeltaAvailable(transition.getToVersion());
+    void fireNoDelta(long version) {
+        for(final HollowProducerListener l : listeners) l.onNoDeltaAvailable(version);
     }
 
-    void firePublishStart(HollowStateTransition transition) {
-        for(final HollowProducerListener l : listeners) l.onPublishStart(transition.getToVersion());
+    void firePublishStart(long version) {
+        for(final HollowProducerListener l : listeners) l.onPublishStart(version);
     }
 
     void firePublishComplete(ProducerStatus publishStatus) {
         for(final HollowProducerListener l : listeners) l.onPublishComplete(publishStatus);
     }
 
-    void fireIntegrityCheckStart(HollowStateTransition transition) {
-        for(final HollowProducerListener l : listeners) l.onIntegrityCheckStart(transition.getToVersion());
+    void fireIntegrityCheckStart(long version) {
+        for(final HollowProducerListener l : listeners) l.onIntegrityCheckStart(version);
     }
 
     void fireIntegrityCheckComplete(ProducerStatus integrityCheckStatus) {
@@ -65,8 +64,8 @@ final class ListenerSupport {
         for(final HollowProducerListener l : listeners) l.onValidationComplete(validationStatus);
     }
 
-    void fireAnnouncementStart(HollowStateTransition transition) {
-        for(final HollowProducerListener l : listeners) l.onAnnouncementStart(transition.getToVersion());
+    void fireAnnouncementStart(long version) {
+        for(final HollowProducerListener l : listeners) l.onAnnouncementStart(version);
     }
 
     void fireAnnouncementComplete(ProducerStatus announcementStatus) {
