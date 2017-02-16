@@ -17,6 +17,7 @@
  */
 package com.netflix.hollow.api.consumer;
 
+import com.netflix.hollow.core.read.engine.HollowReadStateEngine;
 
 /**
  *  Beta API subject to change.
@@ -27,7 +28,10 @@ public class HollowConsumer {
 
     // TODO: timt: is this needed, or do we just use a HollowReadStateEngine in place of this? Created for now
     //   to have symmetry with HollowProducer.WriteState
-    public static interface ReadState {}
+    public static interface ReadState {
+        long getVersion();
+        HollowReadStateEngine getStateEngine();
+    }
     
     public static interface AnnouncementRetriever {
         static final AnnouncementRetriever NO_ANNOUNCEMENTS = new AnnouncementRetriever(){
